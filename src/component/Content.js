@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Carousel } from 'antd'
+import { Layout, Carousel } from 'antd'
+import Cards from './Cards'
 import imgs from './imgs'
 
 export default class Content extends Component {
@@ -7,18 +8,21 @@ export default class Content extends Component {
     super(props)
     this.styles = {
       img: {
-        width: 100 + '%',
-        height: 500 + 'px'
+        width: 80 + '%',
+        height: 'auto'
       }
     }
   }
   render() {
     return (
-      <Carousel effect="fade" autoplay> 
-        {imgs.map((item, index) => {
-          return (<img key={index + 1} src={item} style={this.styles.img}/>)
-        })}
-      </Carousel>
+      <Layout>
+        <Carousel effect="fade" autoplay>
+          {imgs.map((item, index) => {
+            return (<img key={index + 1} src={item} style={this.styles.img} alt='img' />)
+          })}
+        </Carousel>
+        <Cards />
+      </Layout>
     )
   }
 }

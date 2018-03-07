@@ -9,7 +9,17 @@ export default class Main extends Component {
     super(props)
   }
   componentWillMount() {}
-  componentDidMount() {}
+  componentDidMount() {
+    const promise = new Promise(function(resolve, reject) {
+      resolve(1);
+    })
+    promise.then((val) => {
+      console.log(val)
+      return val + 2
+    }).then((val) => {
+      console.log(val)
+    })
+  }
   componentDidUpdate() {}
   componentWillUnmount() {}
   render() {
