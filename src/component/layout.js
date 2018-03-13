@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Layout} from 'antd'
+import { Layout, Divider} from 'antd'
 import Header from './Header'
 import Footer from './Footer'
 import Sider from './Sider'
@@ -30,6 +30,7 @@ export default class Main extends Component {
           <Sider />
           <Content />
         </Layout>
+        <Divider/>
         <Footer />
       </Layout>
     )

@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { Layout, Carousel, Input, Form } from 'antd'
+import { Layout, Carousel, Divider } from 'antd'
 import Cards from './Cards'
-import FFF from './form'
+import ModalForm from './form'
 import imgs from './imgs'
 
-const FormItem = Form.Item
 export default class Content extends Component {
   constructor(props) {
     super(props)
@@ -27,8 +26,10 @@ export default class Content extends Component {
             return (<img key={index + 1} src={item} style={this.styles.img} alt='img' />)
           })}
         </Carousel>
+        <Divider/>
         <Cards />
-        <FFF />
+        <Divider/>
+        <ModalForm />
       </Layout>
     )
   }
