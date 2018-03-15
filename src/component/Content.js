@@ -9,7 +9,7 @@ export default class Content extends Component {
     super(props)
     this.styles = {
       img: {
-        width: 80 + '%',
+        width: 100 + '%',
         height: 'auto'
       },
       title: {
@@ -26,9 +26,7 @@ export default class Content extends Component {
             return (<img key={index + 1} src={item} style={this.styles.img} alt='img' />)
           })}
         </Carousel>
-        <Divider/>
         <Cards />
-        <Divider/>
         <ModalForm />
       </Layout>
     )
