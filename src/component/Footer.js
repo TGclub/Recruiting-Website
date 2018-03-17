@@ -8,7 +8,7 @@ export default class Footer extends Component {
   }
   render() {
     return (
-      <footer>
+      <footer style={{textAlign: 'center', marginBottom: -10 + 'px'}}>
         CTG Recruiting &copy;2018 <br/>Created by GeniusFunny
       </footer>
     )

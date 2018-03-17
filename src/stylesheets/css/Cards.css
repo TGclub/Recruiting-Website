@@ -1,11 +1,10 @@
 .Cards-wrapper {
   display: grid;
   grid-column-gap: 20px;
-  grid-template-columns: 1fr 1fr; }
+  grid-template-columns: 1fr 1fr ; }
   @media screen and (max-width: 768px) {
     .Cards-wrapper {
       display: grid;
-      margin: 0px;
       grid-template-columns: 1fr;
       grid-row-gap: 20px; } }
 

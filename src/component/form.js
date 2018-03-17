@@ -41,16 +41,18 @@ const FormItemData = [
   }
 ]
 
-function ModalSuccess() {
+function ModalSuccess(callback) {
   const modal = Modal.success({
     title: '报名成功',
-    content: 'Deep Dark Fantasy'
+    content: 'Deep Dark Fantasy',
+    onOk: setTimeout(callback('false'), 1000)
   })
   setTimeout(() => {
     modal.destroy()
-    return false
+    return callback('false')
   }, 5000)
 }
+
 
 function InfoItem (props) {
   const type = props.item.type
@@ -89,12 +91,9 @@ function InfoItem (props) {
 class form extends Component {
   constructor (props) {
     super(props)
-    this.handleSubmit = this.handleSubmit.bind(this)
     this.handleOnBlur = this.handleOnBlur.bind(this)
   }
-  handleSubmit () {
-    console.log('submit')
-  }
+
   handleOnBlur (event) {
     window.confirm(event.target.value)
   }
@@ -130,19 +129,12 @@ class form extends Component {
 const FFF = Form.create()(form)
 
 
-
-
-
-
-
 class ModalForm extends Component {
   constructor (props) {
     super(props)
-    this.showModal = this.showModal.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleCancel = this.handleCancel.bind(this)
     this.state = {
-      visible: false,
       confirmLoading: false
     }
     this.styles = {
@@ -152,11 +144,6 @@ class ModalForm extends Component {
         marginLeft: -33 + 'px'
       }
     }
-  }
-  showModal () {
-    this.setState({
-      visible: true
-    })
   }
 
   handleSubmit () {
@@ -176,47 +163,39 @@ class ModalForm extends Component {
       TMOUT_number:"17",
       SECKEY:"5aa8b1a3bb7c7c36b0adb5c8761363199"
     }
-    //  ajax.ajax('http://localhost:3000', 'get')
+    let that = this
     ajax.ajax('http://enroll.zhengsj.top/postForm', 'post', JSON.stringify(data))
-      .then(function (response) {
+      .then(
+        function (response) {
         console.log(response)
-        this.setState({
-          confirmLoading: false,
-          visible: ModalSuccess()
-        })
+          setTimeout(() => {
+            that.setState({
+              confirmLoading: false
+            })
+            ModalSuccess(that.props.handleChangeState)
+          }, 1000)
       }, function (err) {
         console.log(err)
       })
   }
 
   handleCancel () {
-    this.setState({
-      visible: false
-    })
+    this.props.handleChangeState('false')
   }
 
   render () {
     return (
-      <div>
-        <Button
-          onClick={this.showModal}
-          type="primary"
-          style={this.styles.button}
-        >
-          报名
-        </Button>
-        <Modal
-          title="To be a code gay"
-          visible={this.state.visible}
-          onOk={this.handleSubmit}
-          onCancel={this.handleCancel}
-          confirmLoading={this.state.confirmLoading}
-          okText="提交"
-          cancelText="返回"
-        >
-          <FFF />
-        </Modal>
-      </div>
+      <Modal
+        title="To be a code gay"
+        visible={Boolean(this.props.msg)}
+        onOk={this.handleSubmit}
+        onCancel={this.handleCancel}
+        confirmLoading={this.state.confirmLoading}
+        okText="提交"
+        cancelText="返回"
+      >
+        <FFF />
+      </Modal>
     )
   }
 }
